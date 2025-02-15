@@ -11,7 +11,7 @@ const int entrySensorPin = 2;  // Pin sensor masuk
 const int exitSensorPin = 3;   // Pin sensor keluar
 const int slot1Pin = 4;        // Pin sensor slot 1
 const int slot2Pin = 5;        // Pin sensor slot 2
-const int slot3Pin = 6;        // Pin sensor slot 3
+const int slot3Pin = 12;        // Pin sensor slot 3
 const int slot4Pin = 7;        // Pin sensor slot 4
 const int slot5Pin = 8;        // Pin sensor slot 5
 const int slot6Pin = 10;       // Pin sensor slot 6
@@ -119,6 +119,7 @@ void loop() {
   if (entryDetected) {
     if (availableSlots > 0) {
       entryGateServo.write(180); // Buka palang masuk
+      Serial.println("En ya" + entryDetected);
       while (digitalRead(entrySensorPin) == LOW) {
         // Tetap terbuka selama sensor masih mendeteksi obstacle
         delay(100); // Delay kecil untuk menghindari busy-waiting
@@ -131,6 +132,7 @@ void loop() {
   // Kontrol palang keluar
   if (exitDetected) {
     exitGateServo.write(180); // Buka palang keluar
+    Serial.println("Ex ya" + exitDetected);
     while (digitalRead(exitSensorPin) == LOW) {
       // Tetap terbuka selama sensor masih mendeteksi obstacle
       delay(100); // Delay kecil untuk menghindari busy-waiting
