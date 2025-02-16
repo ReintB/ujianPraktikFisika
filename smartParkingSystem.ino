@@ -11,7 +11,7 @@ const int entrySensorPin = 2;  // Pin sensor masuk
 const int exitSensorPin = 3;   // Pin sensor keluar
 const int slot1Pin = 4;        // Pin sensor slot 1
 const int slot2Pin = 5;        // Pin sensor slot 2
-const int slot3Pin = 12;        // Pin sensor slot 3
+const int slot3Pin = 6;        // Pin sensor slot 3
 const int slot4Pin = 7;        // Pin sensor slot 4
 const int slot5Pin = 8;        // Pin sensor slot 5
 const int slot6Pin = 10;       // Pin sensor slot 6
@@ -97,34 +97,34 @@ void loop() {
 
   lcd.setCursor(0, 1);
   lcd.print("S1:");
-  lcd.print(slot1Occupied ? "Fill " : "Empty");
+  lcd.print(slot1Occupied ? "Terisi " : "Kosong");
   lcd.setCursor(0, 2);
   lcd.print("S2:");
-  lcd.print(slot2Occupied ? "Fill " : "Empty");
+  lcd.print(slot2Occupied ? "Terisi " : "Kosong");
   lcd.setCursor(0, 3);
   lcd.print("S3:");
-  lcd.print(slot3Occupied ? "Fill " : "Empty");
+  lcd.print(slot3Occupied ? "Terisi " : "Kosong");
 
   lcd.setCursor(10, 1);
   lcd.print("S4:");
-  lcd.print(slot4Occupied ? "Fill " : "Empty");
+  lcd.print(slot4Occupied ? "Terisi " : "Kosong");
   lcd.setCursor(10, 2);
   lcd.print("S5:");
-  lcd.print(slot5Occupied ? "Fill " : "Empty");
+  lcd.print(slot5Occupied ? "Terisi " : "Kosong");
   lcd.setCursor(10, 3);
   lcd.print("S6:");
-  lcd.print(slot6Occupied ? "Fill " : "Empty");
+  lcd.print(slot6Occupied ? "Terisi " : "Kosong");
 
   // Kontrol palang masuk
   if (entryDetected) {
     if (availableSlots > 0) {
-      entryGateServo.write(180); // Buka palang masuk
+      entryGateServo.write(90); // Buka palang masuk
       Serial.println("En ya" + entryDetected);
       while (digitalRead(entrySensorPin) == LOW) {
         // Tetap terbuka selama sensor masih mendeteksi obstacle
         delay(100); // Delay kecil untuk menghindari busy-waiting
       }
-      delay(3000); // Biarkan palang terbuka selama 3 detik setelah obstacle hilang
+      // delay(3000); // Biarkan palang terbuka selama 3 detik setelah obstacle hilang
       entryGateServo.write(0); // Tutup palang masuk
     }
   }
@@ -137,7 +137,7 @@ void loop() {
       // Tetap terbuka selama sensor masih mendeteksi obstacle
       delay(100); // Delay kecil untuk menghindari busy-waiting
     }
-    delay(3000); // Biarkan palang terbuka selama 3 detik setelah obstacle hilang
+    // delay(3000); // Biarkan palang terbuka selama 3 detik setelah obstacle hilang
     exitGateServo.write(0); // Tutup palang keluar
   }
 
